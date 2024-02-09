@@ -1,0 +1,16 @@
+.Fullscreen {
+    zoom:1.0;
+    width:100%;
+}
+
+.NotFullscreen {
+    zoom: 0.5;
+    width: 50%;
+}
+
+.CampaignTrailPreview {
+    height:100%;
+    display:flex!important;
+    place-items: center;
+    justify-content: center;
+}

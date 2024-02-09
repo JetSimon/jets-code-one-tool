@@ -1,0 +1,11 @@
+.CandidateEditor > .TextInput {
+    box-shadow: none;
+    outline:none;
+}
+
+.CandidateEditor {
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.2);
+    outline: solid gainsboro 1px;
+}

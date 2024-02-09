@@ -1,0 +1,10 @@
+#container {
+position: relative;
+outline: solid gray 1px;
+}
+
+#draghandle {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}

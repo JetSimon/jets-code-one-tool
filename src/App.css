@@ -1,0 +1,22 @@
+.FullscreenButton {
+  position: absolute;
+  padding: 16px;
+}
+
+.App {
+  display:flex;
+  flex-direction: row;
+}
+
+.Editor {
+  display:flex;
+  flex-direction: column;
+  gap:16px;
+  padding:16px;
+  overflow-y: scroll;
+  max-height: 95%;
+}
+
+html, .App, body, #root{
+  height: 100%;
+}
