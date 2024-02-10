@@ -65,8 +65,15 @@ function App() {
 
   function getCode() {
     let output = "";
-    for(let key in data) {
-      output += "campaignTrail_temp." + key + " = " + JSON.stringify(data[key], null, 4) + "\n\n";
+    
+    let electionPk = data.election_json[0].pk;
+
+    let newData = JSON.parse(JSON.stringify(data));
+    newData.opponents_default_json = [{"election":electionPk, "candidates":data.candidate_json.filter((x) => x.fields.running_mate == false).map((x) => x.pk)}]
+    newData.opponents_weighted_json = [{"election":electionPk, "candidates":data.candidate_json.filter((x) => x.fields.running_mate == false).map((x) => x.pk)}]
+
+    for(let key in newData) {
+      output += "campaignTrail_temp." + key + " = " + JSON.stringify(newData[key], null, 4) + "\n\n";
     }
 
     let jet_data = {
