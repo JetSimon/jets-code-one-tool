@@ -74,7 +74,7 @@ function CandidateEditor(props) {
             newData.running_mate_json = newData.running_mate_json.filter((z) => z.fields.running_mate != props.data.candidate_json[props.index].pk);
         }
         else {
-            setRunningMate(props.data.candidate_json.filter((x) => x.fields.running_mate == false)[0].pk)
+            setRunningMate(props.data.candidate_json.filter((x) => x.fields.running_mate == false)[0].pk);
             newData.running_mate_json = newData.running_mate_json.filter((z) => z.fields.candidate != props.data.candidate_json[props.index].pk);
         }
         props.setData(newData);
@@ -91,6 +91,11 @@ function CandidateEditor(props) {
     function deleteCandidate() {
         let newData = JSON.parse(JSON.stringify(props.data));
         newData.candidate_json = removeItemOnce(newData.candidate_json, props.index);
+
+        if(isRunningMate()) {
+            newData.running_mate_json = newData.running_mate_json.filter((z) => z.fields.running_mate != props.data.candidate_json[props.index].pk);
+        }
+
         props.setData(newData);
     }
 
@@ -100,15 +105,19 @@ function CandidateEditor(props) {
 
     function setRunningMate(candidate) {
         let newData = JSON.parse(JSON.stringify(props.data));
-        newData.running_mate_json = newData.running_mate_json.filter((x) => x.fields.running_mate == props.data.candidate_json[props.index].pk)
-        newData.running_mate_json.push(
-            {"model":"campaign_trail.running_mate","pk":Math.round(80000 + Math.random() * 100000),"fields":{"candidate":Number(candidate),"running_mate":props.data.candidate_json[props.index].pk}}
-        );
+        newData.running_mate_json = newData.running_mate_json.filter((x) => x.fields.running_mate != props.data.candidate_json[props.index].pk)
+        
+        if(candidate !== -1) {
+            newData.running_mate_json.push(
+                {"model":"campaign_trail.running_mate","pk":Math.round(80000 + Math.random() * 100000),"fields":{"candidate":Number(candidate),"running_mate":props.data.candidate_json[props.index].pk}}
+            );
+        }
+        
         props.setData(newData);
     }
 
     function getRunningMate() {
-        return props.data.running_mate_json.filter((x) => x.fields.running_mate == props.data.candidate_json[props.index].pk)[0]?.fields.candidate;
+        return props.data.running_mate_json.filter((x) => x.fields.running_mate == props.data.candidate_json[props.index].pk)[0]?.fields.candidate ?? -1;
     }
 
     return (
@@ -133,6 +142,7 @@ function CandidateEditor(props) {
                 isRunningMate() &&
                 (<div><label>Runs With:</label>
                 <select onChange={(e) => setRunningMate(e.target.value)} value={getRunningMate()}>
+                <option key={-1} value={-1}>Not Set</option>
                 {props.data.candidate_json.filter((x) => x.fields.running_mate == false).map((x) =><option key={x.pk} value={x.pk}>{x.fields.first_name} {x.fields.last_name}</option>)}
                 </select></div>)
             }
