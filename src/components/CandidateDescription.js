@@ -7,7 +7,7 @@ function CandidateDescription(props) {
     const [candidateIndex, setCandidateIndex] = useState(0);
 
     function getCandidateList() {
-        return props.data.candidate_json.filter((x) => x.fields.is_active && x.fields.running_mate).map((x) => <option key={props.data.candidate_json.indexOf(x)} value={props.data.candidate_json.indexOf(x)}>{x.fields.first_name} {x.fields.last_name}</option>)
+        return props.data.candidate_json.filter((x) => x.fields.is_active && !x.fields.running_mate).map((x) => <option key={props.data.candidate_json.indexOf(x)} value={props.data.candidate_json.indexOf(x)}>{x.fields.first_name} {x.fields.last_name}</option>)
     }
 
     function getCandidate() {
