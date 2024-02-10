@@ -18,7 +18,7 @@ function ElectionDescription(props) {
             </div>
         </div>
     </div>
-    <p><button onClick={() => props.setShowElectionDescription(false)} id="election_id_button">Continue</button></p>
+    <p><button onClick={() => props.setCurrentMode("CANDIDATE")} id="election_id_button">Continue</button></p>
     <p id="credits">This scenario was made by {props.credits}.</p>
 </div>
     );

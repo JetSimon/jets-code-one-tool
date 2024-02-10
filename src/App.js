@@ -158,7 +158,8 @@ document.body.background = "${backgroundImageUrl}";
     let temp = {}
     temp.election_json = [elections.filter((x) => x.pk == e.target.value)[0]];
     temp.candidate_json = candidates.filter((x) => x.fields.election == e.target.value);
-    temp.running_mate_json = runningMates;
+    let candidatePks = new Set(temp.candidate_json.map((x) => x.pk));
+    temp.running_mate_json = runningMates.filter((x) => candidatePks.has(x.fields.candidate) || candidatePks.has(x.fields.running_mate));
     temp.credits = "Dan Bryan"
     setData(temp);
   }

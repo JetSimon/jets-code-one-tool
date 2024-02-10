@@ -2,10 +2,11 @@ import {React, useState} from "react";
 import './CampaignTrailPreview.css'
 import ElectionDescription from "./ElectionDescription";
 import CandidateDescription from "./CandidateDescription";
+import RunningMateDescription from "./RunningMateDescription";
 
 function CampaignTrailPreview(props) {
 
-    const [showElectionDescription, setShowElectionDescription] = useState(true);
+    const [currentMode, setCurrentMode] = useState("ELECTION");
 
     function getStyle() {
         let style = {
@@ -16,6 +17,19 @@ function CampaignTrailPreview(props) {
 
         return style;
     }  
+
+    function getWindowComponent() {
+      if(currentMode == "ELECTION") {
+        return <ElectionDescription innerWindowColor={props.innerWindowColor} setCurrentMode={setCurrentMode} credits={props.credits} electionImage={props.electionImage} electionSummary={props.electionSummary} electionYear={props.electionYear}></ElectionDescription>
+      }  
+      else if(currentMode == "CANDIDATE") {
+        return <CandidateDescription innerWindowColor={props.innerWindowColor} data={props.data} setCurrentMode={setCurrentMode}></CandidateDescription>
+      }
+      else if(currentMode == "RUNNINGMATE") {
+        return <RunningMateDescription innerWindowColor={props.innerWindowColor} data={props.data} setCurrentMode={setCurrentMode}></RunningMateDescription>
+      }
+      return <p>ERROR BAD MODE</p>
+    }
 
     return (
     <div className={(props.fullscreen ? "Fullscreen" : "NotFullscreen") + " CampaignTrailPreview base"} style={getStyle()}>
@@ -30,11 +44,8 @@ function CampaignTrailPreview(props) {
             <div className="game_header" style={{backgroundColor:props.headerColor}}>
               <h2>THE CAMPAIGN TRAIL</h2>
             </div>
-            {showElectionDescription ?
-            <ElectionDescription innerWindowColor={props.innerWindowColor} setShowElectionDescription={setShowElectionDescription} credits={props.credits} electionImage={props.electionImage} electionSummary={props.electionSummary} electionYear={props.electionYear}></ElectionDescription>
-            :
-            <CandidateDescription innerWindowColor={props.innerWindowColor} data={props.data} setShowElectionDescription={setShowElectionDescription}></CandidateDescription>
-            }  </div>
+            {getWindowComponent()}
+            </div>
           
           </div>
           </div>

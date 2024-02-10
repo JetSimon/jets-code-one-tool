@@ -40,9 +40,9 @@ function CandidateDescription(props) {
                 <div dangerouslySetInnerHTML={{__html:getCandidate().fields.description}}></div>
             </div>
         </div>
-
-            <button onClick={() => props.setShowElectionDescription(true)} className="person_button" id="candidate_id_back">Back</button>
-            {/*<button className="person_button" id="candidate_id_button">Continue</button> </p>*/}
+        <p>
+            <button onClick={() => props.setCurrentMode("ELECTION")} className="person_button" id="candidate_id_back">Back</button>
+            <button onClick={() => props.setCurrentMode("RUNNINGMATE")} className="person_button" id="candidate_id_button">Continue</button> </p>
     </div>
     );
 }
