@@ -9,6 +9,21 @@ import "./App.css"
 import Resizeable from "./utils/Resizeable";
 import TextArea from "./components/TextArea";
 import CandidateEditor from "./components/CandidateEditor";
+import elections from './data/election'
+import candidates from './data/candidate'
+import runningMates from './data/running_mate.json'
+
+let pkCounter = 50000;
+
+for(let election of elections) {
+  election.fields.display_year = String(election.fields.year);
+}
+
+for(let candidate of candidates) {
+  candidate.fields.running_mate = runningMates.filter((x) => x.fields.running_mate == candidate.pk).length > 0;
+}
+
+elections.reverse();
 
 function App() {
 
@@ -24,7 +39,16 @@ function App() {
   function loadTheme(fileContent) {
     let campaignTrail_temp = {};
     let e = campaignTrail_temp;
+    let nct_stuff = {};
     let jet_data = {};
+    let RecReading = "";
+    let quotes = [];
+    let customquote = "";
+    let corrr = "";
+
+    if(fileContent.includes("//#startcode")) {
+      fileContent = fileContent.split("//#startcode")[0] + fileContent.split("//#endcode")[1];
+    }
 
     eval(fileContent);
 
@@ -36,12 +60,10 @@ function App() {
       setInnerWindowColor(jet_data.innerWindowColor);
     }
 
-    let election = e.election_json[0].fields;
-
     setData(() => ({...campaignTrail_temp}))
   }
 
-  function exportTheme() {
+  function getCode() {
     let output = "";
     for(let key in data) {
       output += "campaignTrail_temp." + key + " = " + JSON.stringify(data[key], null, 4) + "\n\n";
@@ -58,7 +80,30 @@ function App() {
 
     output += "jet_data = " + JSON.stringify(jet_data, null, 4);
 
-    navigator.clipboard.writeText(output);
+    output += "\n\n//#startcode\n" + getThemeCode() + "\n//#endcode\n"
+    return output;
+  }
+
+  function getThemeCode() {
+    return `
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "${headerColor}";
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#${windowColor}";
+
+document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_title;
+
+$("#game_window")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_window;
+
+$(".container")[0].style.backgroundColor = "#${containerColor}";
+
+document.getElementById("header").src = "${bannerImageUrl}";
+
+document.body.background = "${backgroundImageUrl}";
+`
+  }
+
+  function copyToClipboard() {
+    navigator.clipboard.writeText(getCode());
   }
 
   const [fullscreen, setFullscreen] = useState(true);
@@ -71,9 +116,17 @@ function App() {
   const [bannerImageUrl, setBannerImageUrl] = useState("https://jetsimon.com/public/placeholderbanner.png");
   const [backgroundImageUrl, setBackgroundImageUrl] = useState("https://coolbackgrounds.io/images/backgrounds/white/pure-white-background-85a2a7fd.jpg");
 
+  function addCandidate(x) {
+    let newData = JSON.parse(JSON.stringify(data));
+    let newCandidate = JSON.parse(JSON.stringify(defaultData.candidate_json[0]));
+    newCandidate.pk = pkCounter++;
+    newData.candidate_json.push(newCandidate);
+    setData(newData)
+  }
+
   function setElectionYear(x) {
     let newData = JSON.parse(JSON.stringify(data));
-    newData.election_json[0].fields.year = x;
+    newData.election_json[0].fields.display_year = x;
     setData(newData)
   }
 
@@ -101,12 +154,27 @@ function App() {
     setData(newData);
   }
 
+  function selectTemplate(e) {
+    let temp = {}
+    temp.election_json = [elections.filter((x) => x.pk == e.target.value)[0]];
+    temp.candidate_json = candidates.filter((x) => x.fields.election == e.target.value);
+    temp.running_mate_json = runningMates;
+    temp.credits = "Dan Bryan"
+    setData(temp);
+  }
+
   return (
     <div className="App">
       <Resizeable className="Editor">
+        <div style={{"display":"flex"}}>
+          <button className="EditorButton" onClick={openFilePicker}>Import Code 1</button>
+          <button className="EditorButton" onClick={copyToClipboard}>Copy to Clipboard</button>
         <div>
-          <button onClick={openFilePicker}>Import</button>
-          <button onClick={exportTheme}>Export</button>
+        <label>or choose a template</label>
+        <select onChange={selectTemplate}>
+            {elections.map((x) =><option key={x.pk} value={x.pk}>{x.fields.display_year}</option>)}
+        </select>
+        </div>
         </div>
         <h3>Theme</h3>
         <Picker target="Header Color" color={headerColor} setColor={setHeaderColor}></Picker>
@@ -117,19 +185,20 @@ function App() {
         <TextInput label="Background Image URL" icon="🖼️" value={backgroundImageUrl} setValue={setBackgroundImageUrl}></TextInput>
 
         <h3>Election</h3>
-        <TextInput label="Election Year" icon="✍️" value={data.election_json[0].fields.year} setValue={setElectionYear}></TextInput>
+        <TextInput label="Election Year" icon="✍️" value={data.election_json[0].fields.display_year} setValue={setElectionYear}></TextInput>
         <TextInput label="Election Image" icon="🖼️" value={data.election_json[0].fields.image_url} setValue={setElectionImage}></TextInput>
         <TextInput label="Advisor Image" icon="🖼️" value={data.election_json[0].fields.advisor_url} setValue={setAdvisorImage}></TextInput>
         <TextArea label="Election Summary" icon="✍️" value={data.election_json[0].fields.summary} setValue={setElectionSummary}></TextArea>
 
         <details open>
-        <summary><h3>Candidates</h3></summary>
-        {data.candidate_json.map((x) => <CandidateEditor setData={setData} key={data.candidate_json.indexOf(x)} index={data.candidate_json.indexOf(x)} data={data} candidate={x}></CandidateEditor>)}
+        <summary><h3>Candidates ({data.candidate_json.length})</h3></summary>
+       
+        <button className="EditorButton GreenButton" onClick={addCandidate}>Add Candidate</button>
+        {data.candidate_json.map((x) => <CandidateEditor setData={setData} key={data.candidate_json.indexOf(x)} index={data.candidate_json.indexOf(x)} data={data}></CandidateEditor>)}
         </details>
         
         <h3>Misc</h3>
         <TextInput label="Credits" icon="🧍" value={data.credits} setValue={setCredits}></TextInput>
-
         <button onClick={() => console.log(data)}>Log Data</button>
       </Resizeable>
       <div style={{width:"100%"}}>

@@ -20,3 +20,29 @@
 html, .App, body, #root{
   height: 100%;
 }
+
+.EditorButton {
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.2);
+  color: #3d3d3d;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+  position: relative;
+  outline: solid gainsboro 1px;
+  margin:8px;
+}
+
+.RedButton {
+  background-color: rgb(221, 30, 30);
+  outline: solid darkred 1px;
+  color: white;
+}
+
+.GreenButton {
+  background-color: rgb(78, 173, 75);
+  outline: solid darkgreen 1px;
+  color: white;
+}

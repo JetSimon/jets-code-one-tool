@@ -8,8 +8,8 @@ defaultData.election_json = [
         "pk": 20,
         "fields": {
             "year": 2016,
-            "summary": "<div style='overflow-y:scroll;height:200px;'><p>Here you concisely describe how the race for this office shapes up. If it fits neatly into the space, it is concise enough.</p><p><ul><li>You can use bullet points to go one by one,</li><li>or choose not to. Depends on how you wish to introduce the candidates.</li></p><p>Remember to format properly or something <i>will</i> go wrong. Happy modding!</p></div>",
-            "image_url": "123",
+            "summary": "Put election description here. You can use html tags here too.",
+            "image_url": "https://www.jetsimon.com/public/exampleelection.png",
             "winning_electoral_vote_number": 270,
             "advisor_url": "123",
             "recommended_reading": "<ul>\n<li><a href=https://www.chicagotribune.com/opinion/editorials/ct-edit-chicago-tribune-biden-endorsement-20200925-lnyxsb5qvrftnjjmj3rnzj33jy-story.html>Our Case For Joe Biden</a></li>\n<li><a href=https://nationalinterest.org/feature/case-trump-166808>The Case For Trump</a></li>\n<li><a href=https://www.npr.org/2020/11/18/935730100/how-biden-won-ramping-up-the-base-and-expanding-margins-in-the-suburbs>How Biden Won: Ramping Up The Base And Expanding Margins In The Suburbs</a></li>\n<li><a href=https://www.prospectmagazine.co.uk/politics/donald-trump-joe-biden-us-election-almost-win-votes-concede>Why Did Trump Almost Win?</a></li>\n<li><a href=https://www.hoover.org/research/no-evidence-voter-fraud-guide-statistical-claims-about-2020-election>No Evidence For Voter Fraud: A Guide To Statistical Claims About The 2020 Election</a></li>\n</ul>",
@@ -28,7 +28,7 @@ defaultData.temp_election_list = [
     }
 ];
 
-defaultData.credits = "jjet";
+defaultData.credits = "Not Dan Bryan";
 
 defaultData.global_parameter_json = [
     {
@@ -60,82 +60,29 @@ defaultData.candidate_json = [
         "model": "campaign_trail.candidate",
         "pk": 1001,
         "fields": {
-            "first_name": "Dummy",
-            "last_name": "Example",
+            "first_name": "Mr",
+            "last_name": "President",
             "election": 20,
-            "party": "Example Party",
-            "state": "Hell",
+            "party": "Turbo Team",
+            "state": "Idaho",
             "priority": 1,
-            "description": "Dummy Example is a veteran from Hell. He loves puppies and magic! Dummy Example will unite America!<br><br>New line<br><br>This is <b>bold</b> and this <i>italic</i>!",
+            "description": "<p>Put description here</p>",
             "color_hex": "#0000FF",
             "secondary_color_hex": null,
             "is_active": 1,
-            "image_url": "../static/images/barack-obama-2012.jpg",
-            "electoral_victory_message": "<h3>REAL PATRIOT DUMMY EXAMPLE SWEEPS</h3>",
-            "electoral_loss_message": "<h3>Fake News?</h3>",
-            "no_electoral_majority_message": "<h3>DUMMY EXAMPLE RETURNS TO HELL</h3>",
+            "image_url": "https://www.jetsimon.com/public/candidateexample.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
             "description_as_running_mate": null,
-            "candidate_score": 1
-        }
-    },
-    {
-        "model": "campaign_trail.candidate",
-        "pk": 1002,
-        "fields": {
-            "first_name": "Dummy",
-            "last_name": "Example",
-            "election": 20,
-            "party": "Example Party",
-            "state": "Hell",
-            "priority": 1,
-            "description": "Dummy Example is a veteran from Hell. He loves puppies and magic! Dummy Example will unite America!<br><br>New line<br><br>This is <b>bold</b> and this <i>italic</i>!",
-            "color_hex": "#0000ff",
-            "secondary_color_hex": null,
-            "is_active": 0,
-            "image_url": "../static/images/barack-obama-2012.jpg",
-            "electoral_victory_message": "<h3>REAL PATRIOT DUMMY EXAMPLE SWEEPS</h3>",
-            "electoral_loss_message": "<h3>Fake News?</h3>",
-            "no_electoral_majority_message": "<h3>DUMMY EXAMPLE RETURNS TO HELL</h3>",
-            "description_as_running_mate": "Dummy Example is a veteran from Hell. He loves puppies and magic! Dummy Example will unite America!<br><br>New line<br><br>This is <b>bold</b> and this <i>italic</i>!",
             "candidate_score": 1,
-            "running_mate": true,
-            "scrollable": false,
-            "partner": "0"
-        }
-    },
-    {
-        "model": "campaign_trail.candidate",
-        "pk": 1003,
-        "fields": {
-            "first_name": "Dummy",
-            "last_name": "Example",
-            "election": 20,
-            "party": "Example Party",
-            "state": "Hell",
-            "priority": 1,
-            "description": "Dummy Example is a veteran from Hell. He loves puppies and magic! Dummy Example will unite America!<br><br>New line<br><br>This is <b>bold</b> and this <i>italic</i>!",
-            "color_hex": "#0000FF",
-            "secondary_color_hex": null,
-            "is_active": 0,
-            "image_url": "../static/images/barack-obama-2012.jpg",
-            "electoral_victory_message": "<h3>REAL PATRIOT DUMMY EXAMPLE SWEEPS</h3>",
-            "electoral_loss_message": "<h3>Fake News?</h3>",
-            "no_electoral_majority_message": "<h3>DUMMY EXAMPLE RETURNS TO HELL</h3>",
-            "description_as_running_mate": null,
-            "candidate_score": 1
+            "running_mate":false
         }
     }
 ];
 
 defaultData.running_mate_json = [
-    {
-        "model": "campaign_trail.running_mate",
-        "pk": 2001,
-        "fields": {
-            "candidate": 1001,
-            "running_mate": 1002
-        }
-    }
+    
 ];
 
 export default defaultData;
