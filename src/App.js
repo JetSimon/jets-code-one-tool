@@ -166,6 +166,7 @@ document.body.background = "${backgroundImageUrl}";
   return (
     <div className="App">
       <Resizeable className="Editor">
+        <h2 style={{textAlign:"center"}}>Jet's Code 1 Tool</h2>
         <div style={{"display":"flex"}}>
           <button className="EditorButton" onClick={openFilePicker}>Import Code 1</button>
           <button className="EditorButton" onClick={copyToClipboard}>Copy to Clipboard</button>
