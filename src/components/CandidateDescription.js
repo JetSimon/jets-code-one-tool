@@ -7,11 +7,11 @@ function CandidateDescription(props) {
     const [candidateIndex, setCandidateIndex] = useState(0);
 
     function getCandidateList() {
-        return props.candidate_json.filter((x) => x.fields.is_active).map((x) => <option key={props.candidate_json.indexOf(x)} value={props.candidate_json.indexOf(x)}>{x.fields.first_name} {x.fields.last_name}</option>)
+        return props.data.candidate_json.filter((x) => x.fields.is_active).map((x) => <option key={props.data.candidate_json.indexOf(x)} value={props.data.candidate_json.indexOf(x)}>{x.fields.first_name} {x.fields.last_name}</option>)
     }
 
     function getCandidate() {
-        return props.candidate_json[candidateIndex];
+        return props.data.candidate_json[candidateIndex];
     }
 
     function onCandidateSelected(e) {
@@ -20,7 +20,6 @@ function CandidateDescription(props) {
 
     return (
 <div style={{backgroundColor:props.innerWindowColor}} className="inner_window_w_desc" id="inner_window_3">
-        <p style={{display:"none"}}>{props.dummy}</p>
         <div id="candidate_form">
             <form name="candidate">
                 <p> </p>

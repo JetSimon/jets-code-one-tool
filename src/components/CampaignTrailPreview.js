@@ -33,7 +33,7 @@ function CampaignTrailPreview(props) {
             {showElectionDescription ?
             <ElectionDescription innerWindowColor={props.innerWindowColor} setShowElectionDescription={setShowElectionDescription} credits={props.credits} electionImage={props.electionImage} electionSummary={props.electionSummary} electionYear={props.electionYear}></ElectionDescription>
             :
-            <CandidateDescription innerWindowColor={props.innerWindowColor} dummy={props.dummy} candidate_json={props.candidate_json} setShowElectionDescription={setShowElectionDescription}></CandidateDescription>
+            <CandidateDescription innerWindowColor={props.innerWindowColor} data={props.data} setShowElectionDescription={setShowElectionDescription}></CandidateDescription>
             }  </div>
           
           </div>

@@ -7,67 +7,74 @@ import "./CandidateEditor.css"
 
 function CandidateEditor(props) {
 
-    const [firstName, setFirstName] = useState(props.candidate.fields.first_name);
-    useEffect(() => {
-        props.candidate_json[props.index].fields.first_name = firstName;
-        props.setDummy(Math.random());
-    }, [firstName]);
+    function setFirstName(x) {
+        let newData = JSON.parse(JSON.stringify(props.data));
+        newData.candidate_json[props.index].fields.first_name = x;
+        props.setData(newData);
+    }
 
-    const [lastName, setLastName] = useState(props.candidate.fields.last_name);
-    useEffect(() => {
-        props.candidate_json[props.index].fields.last_name = lastName;
-        props.setDummy(Math.random());
-    }, [lastName]);
+    function setLastName(x) {
+        let newData = JSON.parse(JSON.stringify(props.data));
+        newData.candidate_json[props.index].fields.last_name = x;
+        props.setData(newData);
+    }
 
-    const [party, setParty] = useState(props.candidate.fields.party);
-    useEffect(() => {
-        props.candidate_json[props.index].fields.party = party;
-        props.setDummy(Math.random());
-    }, [party]);
+    function setParty(x) {
+        let newData = JSON.parse(JSON.stringify(props.data));
+        newData.candidate_json[props.index].fields.party = x;
+        props.setData(newData);
+    }
 
-    const [state, setState] = useState(props.candidate.fields.state);
-    useEffect(() => {
-        props.candidate_json[props.index].fields.state = state;
-        props.setDummy(Math.random());
-    }, [state]);
+    function setState(x) {
+        let newData = JSON.parse(JSON.stringify(props.data));
+        newData.candidate_json[props.index].fields.state = x;
+        props.setData(newData);
+    }
 
-    const [description, setDescription] = useState(props.candidate.fields.description);
-    useEffect(() => {
-        props.candidate_json[props.index].fields.description = description;
-        props.setDummy(Math.random());
-    }, [state]);
+    function setDescription(x) {
+        let newData = JSON.parse(JSON.stringify(props.data));
+        newData.candidate_json[props.index].fields.description = x;
+        props.setData(newData);
+    }
 
-    const [imageUrl, setImageUrl] = useState(props.candidate.fields.image_url);
-    useEffect(() => {
-        props.candidate_json[props.index].fields.image_url = imageUrl;
-        props.setDummy(Math.random());
-    }, [state]);
+    function setImageUrl(x) {
+        let newData = JSON.parse(JSON.stringify(props.data));
+        newData.candidate_json[props.index].fields.image_url = x;
+        props.setData(newData);
+    }
 
-    const [pk, setPk] = useState(props.candidate.pk);
-    useEffect(() => {
-        props.candidate_json[props.index].pk = pk;
-        props.setDummy(Math.random());
-    }, [pk]);
+    function setPk(x) {
+        let newData = JSON.parse(JSON.stringify(props.data));
+        newData.candidate_json[props.index].pk = x;
+        props.setData(newData);
+    }
 
-    const [color, setColor] = useState(props.candidate.fields.color_hex);
-    useEffect(() => {
-        props.candidate_json[props.index].fields.color_hex = color;
-        props.setDummy(Math.random());
-    }, [color]);
+    function setColor(x) {
+        let newData = JSON.parse(JSON.stringify(props.data));
+        newData.candidate_json[props.index].fields.color_hex = x;
+        props.setData(newData);
+    }
+
+    function setPlayable(x) {
+        let newData = JSON.parse(JSON.stringify(props.data));
+        console.log(x)
+        newData.candidate_json[props.index].fields.is_active = x ? 1 : 0;
+        props.setData(newData);
+    }
 
     return (
         <div className="CandidateEditor">
             <div style={{display:"none"}}>{props.dummy2}</div>
-            <h2 style={{textAlign:"center"}}>{firstName} {lastName}</h2>
-            <TextInput icon="✍️" label="First Name" value={firstName} setValue={setFirstName}/>
-            <TextInput icon="✍️" label="Last Name" value={lastName} setValue={setLastName}/>
-            <TextInput icon="✍️" label="Party" value={party} setValue={setParty}/>
-            <TextInput icon="✍️" label="State" value={state} setValue={setState}/>
-            <Picker target="Candidate Color" color={color} setColor={setColor}></Picker>
-            <TextInput label="Candidate Image" icon="🖼️" value={imageUrl} setValue={setImageUrl}></TextInput>
-            <TextArea icon="✍️" label="Description" value={description} setValue={setDescription}/>
-            <CheckBox icon="🖊️" label="Is Playable"></CheckBox>
-            <TextInput icon="✍️" label="PK" value={pk} setValue={setPk}/>
+            <h2 style={{textAlign:"center"}}>{props.data.candidate_json[props.index].fields.first_name} {props.data.candidate_json[props.index].fields.last_name}</h2>
+            <TextInput icon="✍️" label="First Name" value={props.data.candidate_json[props.index].fields.first_name} setValue={setFirstName}/>
+            <TextInput icon="✍️" label="Last Name" value={props.data.candidate_json[props.index].fields.last_name} setValue={setLastName}/>
+            <TextInput icon="✍️" label="Party" value={props.data.candidate_json[props.index].fields.party} setValue={setParty}/>
+            <TextInput icon="✍️" label="State" value={props.data.candidate_json[props.index].fields.state} setValue={setState}/>
+            <Picker target="Candidate Color" color={props.data.candidate_json[props.index].fields.color_hex} setColor={setColor}></Picker>
+            <TextInput label="Candidate Image" icon="🖼️" value={props.data.candidate_json[props.index].fields.image_url} setValue={setImageUrl}></TextInput>
+            <TextArea icon="✍️" label="Description" value={props.data.candidate_json[props.index].fields.description} setValue={setDescription}/>
+            <CheckBox value={props.data.candidate_json[props.index].fields.is_active} setValue={setPlayable} icon="🖊️" label="Is Playable"></CheckBox>
+            <TextInput icon="✍️" label="PK" value={props.data.candidate_json[props.index].pk} setValue={setPk}/>
         </div>
     );
 }
