@@ -1,4 +1,4 @@
-.CandidateEditor > .TextInput {
+.CandidateEditor > .TextInput, .CandidateEditor > .Picker {
     box-shadow: none;
     outline:none;
 }

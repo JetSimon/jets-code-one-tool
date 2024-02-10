@@ -31,9 +31,9 @@ function CampaignTrailPreview(props) {
               <h2>THE CAMPAIGN TRAIL</h2>
             </div>
             {showElectionDescription ?
-            <ElectionDescription setShowElectionDescription={setShowElectionDescription} credits={props.credits} electionImage={props.electionImage} electionSummary={props.electionSummary} electionYear={props.electionYear}></ElectionDescription>
+            <ElectionDescription innerWindowColor={props.innerWindowColor} setShowElectionDescription={setShowElectionDescription} credits={props.credits} electionImage={props.electionImage} electionSummary={props.electionSummary} electionYear={props.electionYear}></ElectionDescription>
             :
-            <CandidateDescription dummy={props.dummy} candidate_json={props.candidate_json} setShowElectionDescription={setShowElectionDescription}></CandidateDescription>
+            <CandidateDescription innerWindowColor={props.innerWindowColor} dummy={props.dummy} candidate_json={props.candidate_json} setShowElectionDescription={setShowElectionDescription}></CandidateDescription>
             }  </div>
           
           </div>

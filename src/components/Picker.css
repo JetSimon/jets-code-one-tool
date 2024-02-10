@@ -108,3 +108,16 @@
 .TextArea > div > label {
     margin-left: 0px;
 }
+
+.CheckBox {
+    flex-direction: row;
+}
+
+.CheckBox > input {
+    width: auto;
+    transform:scale(1.5)
+}
+
+.CheckBox > label {
+    margin-left: 0px;
+}

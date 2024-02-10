@@ -19,7 +19,7 @@ function CandidateDescription(props) {
     }
 
     return (
-<div className="inner_window_w_desc" id="inner_window_3">
+<div style={{backgroundColor:props.innerWindowColor}} className="inner_window_w_desc" id="inner_window_3">
         <p style={{display:"none"}}>{props.dummy}</p>
         <div id="candidate_form">
             <form name="candidate">
