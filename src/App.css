@@ -14,7 +14,7 @@
   }
 
   .Editor {
-    overflow-y: auto;
+    overflow-y: visible!important;
   }
 }
 
