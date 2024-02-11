@@ -55,6 +55,7 @@ defaultData.global_parameter_json = [
     }
 ];
 
+
 defaultData.candidate_json = [
     {
         "model": "campaign_trail.candidate",
@@ -76,13 +77,45 @@ defaultData.candidate_json = [
             "no_electoral_majority_message": "We all win?",
             "description_as_running_mate": null,
             "candidate_score": 1,
-            "running_mate":false
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 50000,
+        "fields": {
+            "first_name": "Running",
+            "last_name": "Mate",
+            "election": 20,
+            "party": "Turbo Team",
+            "state": "Idaho",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/candidateexample.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": "<p>This is a running mate description it only shows for running mates</p>",
+            "candidate_score": 1,
+            "running_mate": true
         }
     }
-];
+]
 
 defaultData.running_mate_json = [
-    
-];
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 109261,
+        "fields": {
+            "candidate": 1001,
+            "running_mate": 50000
+        }
+    }
+]
+
+
 
 export default defaultData;

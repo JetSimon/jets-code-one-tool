@@ -129,6 +129,7 @@ document.body.background = "${backgroundImageUrl}";
     let newData = JSON.parse(JSON.stringify(data));
     let newCandidate = JSON.parse(JSON.stringify(defaultData.candidate_json[0]));
     newCandidate.pk = pkCounter++;
+    newCandidate.fields.election = newData.election_json[0].pk;
     newData.candidate_json.push(newCandidate);
     setData(newData)
   }
