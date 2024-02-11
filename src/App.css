@@ -12,6 +12,10 @@
   .App {
     flex-direction: column;
   }
+
+  .Editor {
+    overflow-y: auto;
+  }
 }
 
 .Editor {
