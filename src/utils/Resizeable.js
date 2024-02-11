@@ -4,7 +4,7 @@ import {React, useState} from "react"
 import "./Resizeable.css"
 
 function Resizeable(props) {
-  const [size, setSize] = useState({ x: 400, y: 300 });
+  const [size, setSize] = useState({ x: 550, y: 300 });
 
   const handler = (mouseDownEvent) => {
     const startSize = size;

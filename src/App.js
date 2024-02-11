@@ -113,6 +113,8 @@ document.body.background = "${backgroundImageUrl}";
     navigator.clipboard.writeText(getCode());
   }
 
+  const [mode, setMode] = useState("ALL");
+
   const [fullscreen, setFullscreen] = useState(true);
 
   const [headerColor, setHeaderColor] = useState("#700016");
@@ -175,16 +177,26 @@ document.body.background = "${backgroundImageUrl}";
     <div className="App">
       <Resizeable className="Editor">
         <h2 style={{textAlign:"center"}}>Jet's Code 1 Tool</h2>
-        <div style={{"display":"flex"}}>
+        <div className="FilterBar">
           <button className="EditorButton" onClick={openFilePicker}>Import Code 1</button>
           <button className="EditorButton" onClick={copyToClipboard}>Copy to Clipboard</button>
-        <div>
-        <label>or choose a template</label>
-        <select onChange={selectTemplate}>
-            {elections.map((x) =><option key={x.pk} value={x.pk}>{x.fields.display_year}</option>)}
-        </select>
+          <div style={{margin:"auto"}}>
+          <label>Or choose a template</label>
+          <select onChange={selectTemplate}>
+              {elections.map((x) =><option key={x.pk} value={x.pk}>{x.fields.display_year}</option>)}
+          </select>
+          </div>
         </div>
+
+        <div class="FilterBar">
+          <button className={"FilterButton" + (mode == "ALL" ? " SelectedFilterButton" : "")} onClick={() => setMode("ALL")}>All</button>
+          <button className={"FilterButton" + (mode == "THEME" ? " SelectedFilterButton" : "")} onClick={() => setMode("THEME")}>Theme</button>
+          <button className={"FilterButton" + (mode == "ELECTION" ? " SelectedFilterButton" : "")} onClick={() => setMode("ELECTION")}>Election</button>
+          <button className={"FilterButton" + (mode == "CANDIDATES" ? " SelectedFilterButton" : "")} onClick={() => setMode("CANDIDATES")}>Candidates</button>
+          <button className={"FilterButton" + (mode == "MISC" ? " SelectedFilterButton" : "")} onClick={() => setMode("MISC")}>Misc</button>
         </div>
+
+        <div className="Settings" style={{display:(mode == "ALL" || mode == "THEME") ? "flex" : "none"}}>
         <h3>Theme</h3>
         <Picker target="Header Color" color={headerColor} setColor={setHeaderColor}></Picker>
         <Picker target="Window Color" color={windowColor} setColor={setWindowColor}></Picker>
@@ -192,23 +204,29 @@ document.body.background = "${backgroundImageUrl}";
         <Picker target="Inner Window Color" color={innerWindowColor} setColor={setInnerWindowColor}></Picker>
         <TextInput label="Banner Image URL" icon="🖼️" value={bannerImageUrl} setValue={setBannerImageUrl}></TextInput>
         <TextInput label="Background Image URL" icon="🖼️" value={backgroundImageUrl} setValue={setBackgroundImageUrl}></TextInput>
+        </div>
 
+        <div className="Settings" style={{display:(mode == "ALL" || mode == "ELECTION") ? "flex" : "none"}}>
         <h3>Election</h3>
         <TextInput label="Election Year" icon="✍️" value={data.election_json[0].fields.display_year} setValue={setElectionYear}></TextInput>
         <TextInput label="Election Image" icon="🖼️" value={data.election_json[0].fields.image_url} setValue={setElectionImage}></TextInput>
         <TextInput label="Advisor Image" icon="🖼️" value={data.election_json[0].fields.advisor_url} setValue={setAdvisorImage}></TextInput>
         <TextArea label="Election Summary" icon="✍️" value={data.election_json[0].fields.summary} setValue={setElectionSummary}></TextArea>
+        </div>
 
-        <details open>
-        <summary><h3>Candidates ({data.candidate_json.length})</h3></summary>
-       
-        <button className="EditorButton GreenButton" onClick={addCandidate}>Add Candidate</button>
-        {data.candidate_json.map((x) => <CandidateEditor setData={setData} key={data.candidate_json.indexOf(x)} index={data.candidate_json.indexOf(x)} data={data}></CandidateEditor>)}
-        </details>
-        
-        <h3>Misc</h3>
-        <TextInput label="Credits" icon="🧍" value={data.credits} setValue={setCredits}></TextInput>
-        <button onClick={() => console.log(data)}>Log Data</button>
+        <div className="Settings" style={{display:(mode == "ALL" || mode == "CANDIDATES") ? "flex" : "none"}}>
+          <h3>Candidates ({data.candidate_json.length})</h3>
+          <button className="EditorButton GreenButton" onClick={addCandidate}>Add Candidate</button>
+          {data.candidate_json.map((x) => <CandidateEditor setData={setData} key={data.candidate_json.indexOf(x)} index={data.candidate_json.indexOf(x)} data={data}></CandidateEditor>)}
+        </div> 
+
+        <div className="Settings" style={{display:(mode == "ALL" || mode == "MISC") ? "flex" : "none"}}>
+          <h3>Misc</h3>
+          <TextInput label="Credits" icon="🧍" value={data.credits} setValue={setCredits}></TextInput>
+        </div>
+
+        <p style={{textAlign:"center",fontSize:"10px", color:"lightgrey"}}>version 1.0.0</p>
+
       </Resizeable>
       <div style={{width:"100%"}}>
         <CampaignTrailPreview innerWindowColor={innerWindowColor} data={data} credits={data.credits} electionImage={data.election_json[0].fields.image_url} electionSummary={data.election_json[0].fields.summary} electionYear={data.election_json[0].fields.year} fullscreen={fullscreen} headerColor={headerColor} windowColor={windowColor} containerColor={containerColor} backgroundImageUrl={backgroundImageUrl} bannerImageUrl={bannerImageUrl}/>
