@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/jets-code-one-tool/static/css/main.32692404.css",
-    "main.js": "/jets-code-one-tool/static/js/main.4156216b.js",
+    "main.css": "/jets-code-one-tool/static/css/main.2ef59f0a.css",
+    "main.js": "/jets-code-one-tool/static/js/main.8bc396f9.js",
     "static/js/592.b433053c.chunk.js": "/jets-code-one-tool/static/js/592.b433053c.chunk.js",
     "index.html": "/jets-code-one-tool/index.html",
-    "main.32692404.css.map": "/jets-code-one-tool/static/css/main.32692404.css.map",
-    "main.4156216b.js.map": "/jets-code-one-tool/static/js/main.4156216b.js.map",
+    "main.2ef59f0a.css.map": "/jets-code-one-tool/static/css/main.2ef59f0a.css.map",
+    "main.8bc396f9.js.map": "/jets-code-one-tool/static/js/main.8bc396f9.js.map",
     "592.b433053c.chunk.js.map": "/jets-code-one-tool/static/js/592.b433053c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.32692404.css",
-    "static/js/main.4156216b.js"
+    "static/css/main.2ef59f0a.css",
+    "static/js/main.8bc396f9.js"
   ]
 }
