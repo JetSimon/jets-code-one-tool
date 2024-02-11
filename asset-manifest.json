@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/jets-code-one-tool/static/css/main.4861458a.css",
+    "main.css": "/jets-code-one-tool/static/css/main.37941032.css",
     "main.js": "/jets-code-one-tool/static/js/main.db45d150.js",
     "static/js/592.b433053c.chunk.js": "/jets-code-one-tool/static/js/592.b433053c.chunk.js",
     "index.html": "/jets-code-one-tool/index.html",
-    "main.4861458a.css.map": "/jets-code-one-tool/static/css/main.4861458a.css.map",
+    "main.37941032.css.map": "/jets-code-one-tool/static/css/main.37941032.css.map",
     "main.db45d150.js.map": "/jets-code-one-tool/static/js/main.db45d150.js.map",
     "592.b433053c.chunk.js.map": "/jets-code-one-tool/static/js/592.b433053c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.4861458a.css",
+    "static/css/main.37941032.css",
     "static/js/main.db45d150.js"
   ]
 }
