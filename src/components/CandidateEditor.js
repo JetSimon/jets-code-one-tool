@@ -120,6 +120,49 @@ function CandidateEditor(props) {
         return props.data.running_mate_json.filter((x) => x.fields.running_mate == props.data.candidate_json[props.index].pk)[0]?.fields.candidate ?? -1;
     }
 
+    function getVictoryMessage() {
+        return props.data.candidate_json[props.index].fields.electoral_victory_message;
+    }
+
+    function setVictoryMessage(x) {
+        let newData = JSON.parse(JSON.stringify(props.data));
+        newData.candidate_json[props.index].fields.electoral_victory_message = x;
+        props.setData(newData);
+    }
+
+    function getLossMessage() {
+        return props.data.candidate_json[props.index].fields.electoral_loss_message;
+    }
+
+    function setLossMessage(x) {
+        let newData = JSON.parse(JSON.stringify(props.data));
+        newData.candidate_json[props.index].fields.electoral_loss_message = x;
+        props.setData(newData);
+    }
+
+    function getTieMessage() {
+        return props.data.candidate_json[props.index].fields.no_electoral_majority_message;
+    }
+
+    function setTieMessage(x) {
+        let newData = JSON.parse(JSON.stringify(props.data));
+        newData.candidate_json[props.index].fields.no_electoral_majority_message = x;
+        props.setData(newData);
+    }
+
+    function getEndings() {
+        if(isRunningMate()) {
+            return <div></div>
+        }
+        return (
+        <div className="InnerEditor">
+        <TextArea icon="✍️" label="Victory Ending Description" value={getVictoryMessage()} setValue={setVictoryMessage}/>
+        <TextArea icon="✍️" label="Loss Ending Description" value={getLossMessage()} setValue={setLossMessage}/>
+        <TextArea icon="✍️" label="No Majority Ending Description" value={getTieMessage()} setValue={setTieMessage}/>
+        </div>
+        );
+    }
+
     return (
         <div className="CandidateEditor">
             <div style={{display:"none"}}>{props.dummy2}</div>
@@ -134,6 +177,9 @@ function CandidateEditor(props) {
             <TextArea icon="✍️" label="Running Mate Description" value={props.data.candidate_json[props.index].fields.description_as_running_mate} setValue={setDescriptionAsRunningMate}/>
             :
             <TextArea icon="✍️" label="Candidate Description" value={props.data.candidate_json[props.index].fields.description} setValue={setDescription}/>) : ""}
+
+            {getEndings()}
+
             <CheckBox value={props.data.candidate_json[props.index].fields.is_active} setValue={setPlayable} icon="🖊️" label="Is Playable"></CheckBox>
             {props.data.candidate_json.length > 1 && props.data.candidate_json.filter((x) => x.fields.running_mate == false).length > 0 ? 
             <CheckBox value={props.data.candidate_json[props.index].fields.running_mate} setValue={setIsRunningMate} icon="🖊️" label="Is Running Mate"></CheckBox>

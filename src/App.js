@@ -95,13 +95,13 @@ function App() {
     return `
 nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "${headerColor}";
 
-nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#${windowColor}";
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "${windowColor}";
 
 document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_title;
 
 $("#game_window")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_window;
 
-$(".container")[0].style.backgroundColor = "#${containerColor}";
+$(".container")[0].style.backgroundColor = "${containerColor}";
 
 document.getElementById("header").src = "${bannerImageUrl}";
 
