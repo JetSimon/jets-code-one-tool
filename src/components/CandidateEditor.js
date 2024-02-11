@@ -74,6 +74,7 @@ function CandidateEditor(props) {
             newData.running_mate_json = newData.running_mate_json.filter((z) => z.fields.running_mate != props.data.candidate_json[props.index].pk);
         }
         else {
+            setPlayable(false);
             setRunningMate(props.data.candidate_json.filter((x) => x.fields.running_mate == false)[0].pk);
             newData.running_mate_json = newData.running_mate_json.filter((z) => z.fields.candidate != props.data.candidate_json[props.index].pk);
         }
@@ -180,7 +181,7 @@ function CandidateEditor(props) {
 
             {getEndings()}
 
-            <CheckBox value={props.data.candidate_json[props.index].fields.is_active} setValue={setPlayable} icon="🖊️" label="Is Playable"></CheckBox>
+            {!isRunningMate() && <CheckBox value={props.data.candidate_json[props.index].fields.is_active} setValue={setPlayable} icon="🖊️" label="Is Playable"></CheckBox>}
             {props.data.candidate_json.length > 1 && props.data.candidate_json.filter((x) => x.fields.running_mate == false).length > 0 ? 
             <CheckBox value={props.data.candidate_json[props.index].fields.running_mate} setValue={setIsRunningMate} icon="🖊️" label="Is Running Mate"></CheckBox>
             : ""}
