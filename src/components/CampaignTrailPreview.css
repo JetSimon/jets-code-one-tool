@@ -8,6 +8,15 @@
     width: 50%;
 }
 
+@media only screen and (max-width: 600px) {
+    .CampaignTrailPreview {
+      zoom:0.33;
+      margin-bottom:100px!important;
+      padding-bottom: 300px!important;
+    }
+  }
+  
+
 .CampaignTrailPreview {
     height:100%;
     display:flex!important;

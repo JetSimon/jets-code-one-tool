@@ -8,3 +8,14 @@ outline: solid gray 1px;
     bottom: 0;
     right: 0;
 }
+
+@media only screen and (max-width: 600px) {
+    #container {
+      width:100%!important;
+    }
+
+    #draghandle {
+        display:none;
+    }
+  }
+  
