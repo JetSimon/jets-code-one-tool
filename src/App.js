@@ -209,7 +209,7 @@ document.body.background = "${backgroundImageUrl}";
 
         <div className="Settings" style={{display:(mode == "ALL" || mode == "ELECTION") ? "flex" : "none"}}>
         <h3>Election</h3>
-        <TextInput label="Election Year" icon="✍️" value={data.election_json[0].fields.display_year} setValue={setElectionYear}></TextInput>
+        <TextInput label="Displayed Election Year" icon="✍️" value={data.election_json[0].fields.display_year} setValue={setElectionYear}></TextInput>
         <TextInput label="Election Image" icon="🖼️" value={data.election_json[0].fields.image_url} setValue={setElectionImage}></TextInput>
         <TextInput label="Advisor Image" icon="🖼️" value={data.election_json[0].fields.advisor_url} setValue={setAdvisorImage}></TextInput>
         <TextArea label="Election Summary" icon="✍️" value={data.election_json[0].fields.summary} setValue={setElectionSummary}></TextArea>
@@ -230,7 +230,7 @@ document.body.background = "${backgroundImageUrl}";
 
       </Resizeable>
       <div style={{width:"100%"}}>
-        <CampaignTrailPreview innerWindowColor={innerWindowColor} data={data} credits={data.credits} electionImage={data.election_json[0].fields.image_url} electionSummary={data.election_json[0].fields.summary} electionYear={data.election_json[0].fields.year} fullscreen={fullscreen} headerColor={headerColor} windowColor={windowColor} containerColor={containerColor} backgroundImageUrl={backgroundImageUrl} bannerImageUrl={bannerImageUrl}/>
+        <CampaignTrailPreview innerWindowColor={innerWindowColor} data={data} credits={data.credits} electionImage={data.election_json[0].fields.image_url} electionSummary={data.election_json[0].fields.summary} electionYear={data.election_json[0].fields.display_year} fullscreen={fullscreen} headerColor={headerColor} windowColor={windowColor} containerColor={containerColor} backgroundImageUrl={backgroundImageUrl} bannerImageUrl={bannerImageUrl}/>
       </div>
     </div>
   );
