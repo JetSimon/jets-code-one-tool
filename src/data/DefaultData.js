@@ -8,7 +8,7 @@ defaultData.election_json = [
         "pk": 20,
         "fields": {
             "year": 2016,
-            "display_year": "2024 - Template",
+            "display_year": "2024Template",
             "summary": "Put election description here. You can use html tags here too.",
             "image_url": "https://www.jetsimon.com/public/exampleelection.png",
             "winning_electoral_vote_number": 270,

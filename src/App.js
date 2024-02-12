@@ -113,6 +113,20 @@ document.body.background = "${backgroundImageUrl}";
     navigator.clipboard.writeText(getCode());
   }
 
+  function exportCode1() {
+    const f = getCode();
+    let element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(f));
+    element.setAttribute('download', data.election_json[0].fields.display_year + "_init.txt");
+
+    element.style.display = 'none';
+    document.body.appendChild(element);
+
+    element.click();
+
+    document.body.removeChild(element);
+  }
+
   const [mode, setMode] = useState("ALL");
 
   const [fullscreen, setFullscreen] = useState(true);
@@ -181,6 +195,7 @@ document.body.background = "${backgroundImageUrl}";
         <a style={{textAlign:"center", "marginTop":"-16px"}} href="https://jetsimon.com/Jets-The-Campaign-Trail-Mod-Tool-Website/">Code 2 Tool Here</a>
         <div className="FilterBar">
           <button className="EditorButton" onClick={openFilePicker}>Import Code 1</button>
+          <button className="EditorButton" onClick={exportCode1}>Export Code 1</button>
           <button className="EditorButton" onClick={copyToClipboard}>Copy to Clipboard</button>
           <div style={{margin:"auto"}}>
           <label>Or choose a template</label>
