@@ -46,6 +46,33 @@ function App() {
     let customquote = "";
     let corrr = "";
 
+    if (campaignTrail_temp.global_parameter_json == null || campaignTrail_temp.global_parameter_json == []) {
+      campaignTrail_temp.global_parameter_json = [
+        {
+            "model": "campaign_trail.global_parameter",
+            "pk": 1,
+            "fields": {
+                "vote_variable": 1.125,
+                "max_swing": 0.12,
+                "start_point": 0.94,
+                "candidate_issue_weight": 10,
+                "running_mate_issue_weight": 3,
+                "issue_stance_1_max": -0.71,
+                "issue_stance_2_max": -0.3,
+                "issue_stance_3_max": -0.125,
+                "issue_stance_4_max": 0.125,
+                "issue_stance_5_max": 0.3,
+                "issue_stance_6_max": 0.71,
+                "global_variance": 0.01,
+                "state_variance": 0.005,
+                "question_count": 25,
+                "default_map_color_hex": "#C9C9C9",
+                "no_state_map_color_hex": "#999999"
+            }
+        }
+      ];
+    }
+
     if(fileContent.includes("//#startcode")) {
       fileContent = fileContent.split("//#startcode")[0] + fileContent.split("//#endcode")[1];
     }
@@ -187,6 +214,12 @@ document.body.background = "${backgroundImageUrl}";
     setData(newData);
   }
 
+  function setQuestionCount(x) {
+    let newData = JSON.parse(JSON.stringify(data));
+    newData.global_parameter_json[0].fields.question_count = Number(x);
+    setData(newData);
+  }
+
   function selectTemplate(e) {
     let temp = {}
     temp.election_json = [elections.filter((x) => x.pk == e.target.value)[0]];
@@ -194,6 +227,32 @@ document.body.background = "${backgroundImageUrl}";
     let candidatePks = new Set(temp.candidate_json.map((x) => x.pk));
     temp.running_mate_json = runningMates.filter((x) => candidatePks.has(x.fields.candidate) || candidatePks.has(x.fields.running_mate));
     temp.credits = "Dan Bryan"
+
+    temp.global_parameter_json = [
+      {
+          "model": "campaign_trail.global_parameter",
+          "pk": 1,
+          "fields": {
+              "vote_variable": 1.125,
+              "max_swing": 0.12,
+              "start_point": 0.94,
+              "candidate_issue_weight": 10,
+              "running_mate_issue_weight": 3,
+              "issue_stance_1_max": -0.71,
+              "issue_stance_2_max": -0.3,
+              "issue_stance_3_max": -0.125,
+              "issue_stance_4_max": 0.125,
+              "issue_stance_5_max": 0.3,
+              "issue_stance_6_max": 0.71,
+              "global_variance": 0.01,
+              "state_variance": 0.005,
+              "question_count": 25,
+              "default_map_color_hex": "#C9C9C9",
+              "no_state_map_color_hex": "#999999"
+          }
+      }
+    ];
+
     setData(temp);
   }
 
@@ -249,9 +308,10 @@ document.body.background = "${backgroundImageUrl}";
         <div className="Settings" style={{display:(mode == "ALL" || mode == "MISC") ? "flex" : "none"}}>
           <h3>Misc</h3>
           <TextInput label="Credits" icon="🧍" value={data.credits} setValue={setCredits}></TextInput>
+          <TextInput label="Question Count" icon="❓" value={data.global_parameter_json[0].fields.question_count} setValue={setQuestionCount}></TextInput>
         </div>
 
-        <p style={{textAlign:"center",fontSize:"10px", color:"lightgrey"}}>version 1.0.1</p>
+        <p style={{textAlign:"center",fontSize:"10px", color:"lightgrey"}}>version 1.0.2</p>
 
       </Resizeable>
       <div style={{width:"100%"}}>
