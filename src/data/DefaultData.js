@@ -83,7 +83,7 @@ defaultData.candidate_json = [
     },
     {
         "model": "campaign_trail.candidate",
-        "pk": 50000,
+        "pk": 1002,
         "fields": {
             "first_name": "Running",
             "last_name": "Mate",
@@ -112,7 +112,7 @@ defaultData.running_mate_json = [
         "pk": 109261,
         "fields": {
             "candidate": 1001,
-            "running_mate": 50000
+            "running_mate": 1002
         }
     }
 ]

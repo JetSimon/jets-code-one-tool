@@ -51,7 +51,7 @@ function CandidateEditor(props) {
 
     function setPk(x) {
         let newData = JSON.parse(JSON.stringify(props.data));
-        newData.candidate_json[props.index].pk = x;
+        newData.candidate_json[props.index].pk = Number(x);
         props.setData(newData);
     }
 
@@ -110,7 +110,7 @@ function CandidateEditor(props) {
         
         if(candidate !== -1) {
             newData.running_mate_json.push(
-                {"model":"campaign_trail.running_mate","pk":Math.round(80000 + Math.random() * 100000),"fields":{"candidate":Number(candidate),"running_mate":props.data.candidate_json[props.index].pk}}
+                {"model":"campaign_trail.running_mate","pk":Math.round(80000 + Math.random() * 100000),"fields":{"candidate":Number(candidate),"running_mate":Number(props.data.candidate_json[props.index].pk)}}
             );
         }
         

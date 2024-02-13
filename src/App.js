@@ -72,6 +72,9 @@ function App() {
     newData.opponents_default_json = [{"election":electionPk, "candidates":data.candidate_json.filter((x) => x.fields.running_mate == false).map((x) => x.pk)}]
     newData.opponents_weighted_json = [{"election":electionPk, "candidates":data.candidate_json.filter((x) => x.fields.running_mate == false).map((x) => x.pk)}]
 
+    newData.temp_election_list[0].id = newData.election_json[0].pk;
+    newData.temp_election_list[0].display_year = newData.election_json[0].fields.display_year;
+
     for(let key in newData) {
       output += "campaignTrail_temp." + key + " = " + JSON.stringify(newData[key], null, 4) + "\n\n";
     }
@@ -242,7 +245,7 @@ document.body.background = "${backgroundImageUrl}";
           <TextInput label="Credits" icon="🧍" value={data.credits} setValue={setCredits}></TextInput>
         </div>
 
-        <p style={{textAlign:"center",fontSize:"10px", color:"lightgrey"}}>version 1.0.0</p>
+        <p style={{textAlign:"center",fontSize:"10px", color:"lightgrey"}}>version 1.0.1</p>
 
       </Resizeable>
       <div style={{width:"100%"}}>
