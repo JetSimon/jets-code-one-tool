@@ -74,7 +74,7 @@ function CandidateEditor(props) {
             newData.running_mate_json = newData.running_mate_json.filter((z) => z.fields.running_mate != props.data.candidate_json[props.index].pk);
         }
         else {
-            setPlayable(false);
+            newData.candidate_json[props.index].fields.is_active = 0;
             setRunningMate(props.data.candidate_json.filter((x) => x.fields.running_mate == false)[0].pk);
             newData.running_mate_json = newData.running_mate_json.filter((z) => z.fields.candidate != props.data.candidate_json[props.index].pk);
         }
