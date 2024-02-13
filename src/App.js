@@ -72,8 +72,14 @@ function App() {
     newData.opponents_default_json = [{"election":electionPk, "candidates":data.candidate_json.filter((x) => x.fields.running_mate == false).map((x) => x.pk)}]
     newData.opponents_weighted_json = [{"election":electionPk, "candidates":data.candidate_json.filter((x) => x.fields.running_mate == false).map((x) => x.pk)}]
 
-    newData.temp_election_list[0].id = newData.election_json[0].pk;
-    newData.temp_election_list[0].display_year = newData.election_json[0].fields.display_year;
+    newData.temp_election_list = [
+      {
+        "id": newData.election_json[0].pk,
+        "year": newData.election_json[0].fields.year,
+        "is_premium": 0,
+        "display_year": newData.election_json[0].fields.display_year
+      }
+    ];
 
     for(let key in newData) {
       output += "campaignTrail_temp." + key + " = " + JSON.stringify(newData[key], null, 4) + "\n\n";

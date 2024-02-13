@@ -164,6 +164,13 @@ function CandidateEditor(props) {
         );
     }
 
+    function getDescriptionEditor() {
+        if(isRunningMate()) {
+            return <TextArea icon="✍️" label="Running Mate Description" value={props.data.candidate_json[props.index].fields.description_as_running_mate} setValue={setDescriptionAsRunningMate}/>
+        }
+        return <TextArea icon="✍️" label="Candidate Description" value={props.data.candidate_json[props.index].fields.description} setValue={setDescription}/>;
+    }
+
     return (
         <div className="CandidateEditor">
             <div style={{display:"none"}}>{props.dummy2}</div>
@@ -174,10 +181,8 @@ function CandidateEditor(props) {
             <TextInput icon="✍️" label="State" value={props.data.candidate_json[props.index].fields.state} setValue={setState}/>
             <Picker target="Candidate Color" color={props.data.candidate_json[props.index].fields.color_hex} setColor={setColor}></Picker>
             <TextInput label="Candidate Image" icon="🖼️" value={props.data.candidate_json[props.index].fields.image_url} setValue={setImageUrl}></TextInput>
-            { props.data.candidate_json[props.index].fields.is_active ? (isRunningMate() ?
-            <TextArea icon="✍️" label="Running Mate Description" value={props.data.candidate_json[props.index].fields.description_as_running_mate} setValue={setDescriptionAsRunningMate}/>
-            :
-            <TextArea icon="✍️" label="Candidate Description" value={props.data.candidate_json[props.index].fields.description} setValue={setDescription}/>) : ""}
+            
+            {getDescriptionEditor()}
 
             {getEndings()}
 
