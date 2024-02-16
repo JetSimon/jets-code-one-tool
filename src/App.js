@@ -85,6 +85,9 @@ function App() {
       setWindowColor(jet_data.windowColor);
       setContainerColor(jet_data.containerColor);
       setInnerWindowColor(jet_data.innerWindowColor);
+      if(jet_data.endingTextColor) {
+        setEndingTextColor(jet_data.endingTextColor);
+      }
     }
 
     setData(() => ({...campaignTrail_temp}))
@@ -118,7 +121,8 @@ function App() {
       "containerColor":containerColor,
       "innerWindowColor":innerWindowColor,
       "bannerImageUrl":bannerImageUrl,
-      "backgroundImageUrl":backgroundImageUrl
+      "backgroundImageUrl":backgroundImageUrl,
+      "endingTextColor":endingTextColor
     }
 
     output += "jet_data = " + JSON.stringify(jet_data, null, 4);
@@ -128,7 +132,7 @@ function App() {
   }
 
   function getThemeCode() {
-    return `
+    let output = `
 nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "${headerColor}";
 
 nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "${windowColor}";
@@ -142,7 +146,10 @@ $(".container")[0].style.backgroundColor = "${containerColor}";
 document.getElementById("header").src = "${bannerImageUrl}";
 
 document.body.background = "${backgroundImageUrl}";
+
+document.head.innerHTML += "<style>#results_container {color:${endingTextColor};}</style>";
 `
+    return output;
   }
 
   function copyToClipboard() {
@@ -170,7 +177,8 @@ document.body.background = "${backgroundImageUrl}";
   const [headerColor, setHeaderColor] = useState("#700016");
   const [windowColor, setWindowColor] = useState("#BFE6FF");
   const [containerColor, setContainerColor] = useState("#FFFFFF");
-  const [innerWindowColor, setInnerWindowColor] = useState("#E8FBFF")
+  const [innerWindowColor, setInnerWindowColor] = useState("#E8FBFF");
+  const [endingTextColor, setEndingTextColor] = useState("#000000");
 
   const [bannerImageUrl, setBannerImageUrl] = useState("https://jetsimon.com/public/placeholderbanner.png");
   const [backgroundImageUrl, setBackgroundImageUrl] = useState("https://coolbackgrounds.io/images/backgrounds/white/pure-white-background-85a2a7fd.jpg");
@@ -309,9 +317,10 @@ document.body.background = "${backgroundImageUrl}";
           <h3>Misc</h3>
           <TextInput label="Credits" icon="🧍" value={data.credits} setValue={setCredits}></TextInput>
           <TextInput label="Question Count" icon="❓" value={data.global_parameter_json[0].fields.question_count} setValue={setQuestionCount}></TextInput>
+          <Picker target="Ending Text Color" color={endingTextColor} setColor={setEndingTextColor}></Picker>
         </div>
 
-        <p style={{textAlign:"center",fontSize:"10px", color:"lightgrey"}}>version 1.0.2</p>
+        <p style={{textAlign:"center",fontSize:"10px", color:"lightgrey"}}>version 1.0.3</p>
 
       </Resizeable>
       <div style={{width:"100%"}}>
