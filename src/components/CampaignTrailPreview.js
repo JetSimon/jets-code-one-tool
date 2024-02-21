@@ -42,7 +42,7 @@ function CampaignTrailPreview(props) {
         <div className="content_single">
           <div id="game_window" style={{backgroundColor:props.windowColor}}>
             <div className="game_header" style={{backgroundColor:props.headerColor}}>
-              <h2>THE CAMPAIGN TRAIL</h2>
+              <h2>{props.gameTitle}</h2>
             </div>
             {getWindowComponent()}
             </div>
