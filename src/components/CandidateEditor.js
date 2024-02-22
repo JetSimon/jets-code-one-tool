@@ -7,6 +7,8 @@ import "./CandidateEditor.css"
 
 function CandidateEditor(props) {
 
+    const [hidden, setHidden] = useState(false);
+
     function setFirstName(x) {
         let newData = JSON.parse(JSON.stringify(props.data));
         newData.candidate_json[props.index].fields.first_name = x;
@@ -171,10 +173,12 @@ function CandidateEditor(props) {
         return <TextArea icon="✍️" label="Candidate Description" value={props.data.candidate_json[props.index].fields.description} setValue={setDescription}/>;
     }
 
-    return (
-        <div className="CandidateEditor">
-            <div style={{display:"none"}}>{props.dummy2}</div>
-            <h2 style={{textAlign:"center"}}>{props.data.candidate_json[props.index].fields.first_name} {props.data.candidate_json[props.index].fields.last_name}</h2>
+    function getRestOfCandidate() {
+        if(hidden) {
+            return "";
+        }
+
+        return ( <div className="InnerEditor">
             <TextInput icon="✍️" label="First Name" value={props.data.candidate_json[props.index].fields.first_name} setValue={setFirstName}/>
             <TextInput icon="✍️" label="Last Name" value={props.data.candidate_json[props.index].fields.last_name} setValue={setLastName}/>
             <TextInput icon="✍️" label="Party" value={props.data.candidate_json[props.index].fields.party} setValue={setParty}/>
@@ -199,6 +203,14 @@ function CandidateEditor(props) {
                 </select></div>)
             }
             <TextInput icon="✍️" label="PK" value={props.data.candidate_json[props.index].pk} setValue={setPk}/>
+            </div>)
+    }
+
+    return (
+        <div className="CandidateEditor">
+            <button className="ToggleButton" onClick={() => setHidden(!hidden)}>{hidden ? "+" : "-"}</button>
+            <h2 style={{textAlign:"center"}}>{props.data.candidate_json[props.index].fields.first_name} {props.data.candidate_json[props.index].fields.last_name}</h2>
+            {getRestOfCandidate()}
             <button onClick={deleteCandidate} style={{"display":"flex", "margin":"auto"}} className="EditorButton RedButton">Delete Candidate</button>
         </div>
     );

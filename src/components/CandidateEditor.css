@@ -8,4 +8,9 @@
     padding: 10px;
     box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.2);
     outline: solid gainsboro 1px;
+    position: relative;
+}
+
+.ToggleButton {
+    position: absolute;
 }
