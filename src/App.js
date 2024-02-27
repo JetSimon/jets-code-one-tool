@@ -157,7 +157,7 @@ document.getElementById("header").src = "${bannerImageUrl}";
 
 document.body.background = "${backgroundImageUrl}";
 
-document.head.innerHTML += "<style>#results_container {color:${endingTextColor};}</style>";
+document.head.innerHTML += "<style>#results_container {color:${endingTextColor};} .inner_window_w_desc {background-color:${innerWindowColor}!important;}</style>";
 `
     return output;
   }
@@ -333,7 +333,7 @@ document.head.innerHTML += "<style>#results_container {color:${endingTextColor};
           <TextInput label="Title" icon="📖" value={gameTitle} setValue={setGameTitle}></TextInput>
         </div>
 
-        <p style={{textAlign:"center",fontSize:"10px", color:"lightgrey"}}>version 1.0.5</p>
+        <p style={{textAlign:"center",fontSize:"10px", color:"lightgrey"}}>version 1.0.6</p>
 
       </Resizeable>
       <div style={{width:"100%"}}>
