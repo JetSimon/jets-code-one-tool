@@ -97,6 +97,17 @@ function App() {
     setData(() => ({...campaignTrail_temp}))
   }
 
+  function inCandidates(d, pk) 
+  {
+    for (let candidate of d) {
+      if (candidate.pk == pk) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   function getCode() {
     let output = "";
     
@@ -105,6 +116,7 @@ function App() {
     let newData = JSON.parse(JSON.stringify(data));
     newData.opponents_default_json = [{"election":electionPk, "candidates":data.candidate_json.filter((x) => x.fields.running_mate == false).map((x) => x.pk)}]
     newData.opponents_weighted_json = [{"election":electionPk, "candidates":data.candidate_json.filter((x) => x.fields.running_mate == false).map((x) => x.pk)}]
+    newData.running_mate_json = newData.running_mate_json.filter((x) => inCandidates(newData.candidate_json, x.fields.candidate) && inCandidates(newData.candidate_json, x.fields.running_mate));
 
     newData.temp_election_list = [
       {
