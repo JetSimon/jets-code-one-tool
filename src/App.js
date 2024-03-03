@@ -345,7 +345,7 @@ document.head.innerHTML += "<style>#results_container {color:${endingTextColor};
           <TextInput label="Title" icon="📖" value={gameTitle} setValue={setGameTitle}></TextInput>
         </div>
 
-        <p style={{textAlign:"center",fontSize:"10px", color:"lightgrey"}}>version 1.0.6</p>
+        <p style={{textAlign:"center",fontSize:"10px", color:"lightgrey"}}>version 1.0.7</p>
 
       </Resizeable>
       <div style={{width:"100%"}}>
