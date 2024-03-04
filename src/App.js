@@ -92,6 +92,10 @@ function App() {
       if(jet_data.gameTitle) {
         setGameTitle(jet_data.gameTitle);
       }
+
+      if(jet_data.customQuote) {
+        setCustomQuote(jet_data.customQuote);
+      }
     }
 
     setData(() => ({...campaignTrail_temp}))
@@ -138,11 +142,16 @@ function App() {
       "innerWindowColor":innerWindowColor,
       "bannerImageUrl":bannerImageUrl,
       "backgroundImageUrl":backgroundImageUrl,
-      "endingTextColor":endingTextColor
+      "endingTextColor":endingTextColor,
+      "customQuote":customQuote
     }
 
     if(gameTitle != "THE CAMPAIGN TRAIL") {
       jet_data.gameTitle = gameTitle;
+    }
+
+    if(customQuote != "") {
+      jet_data.customQuote = customQuote;
     }
 
     output += "jet_data = " + JSON.stringify(jet_data, null, 4);
@@ -152,8 +161,9 @@ function App() {
   }
 
   function getThemeCode() {
+    let quoteHtml = customQuote != "" ? `<font id="wittyquote" size="4" color="white"><em>`+customQuote+`</em></font>` : "";
     let output = `
-${gameTitle == "THE CAMPAIGN TRAIL" ? "" : `\ncorrr = '\\n              <h2>${gameTitle}</h2>\\n            ';\n`}
+${gameTitle != "THE CAMPAIGN TRAIL" || customQuote != "" ? `\ncorrr = '\\n              <h2>${gameTitle}</h2>${quoteHtml}\\n            ';\n` : ""}
 
 nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "${headerColor}";
 
@@ -203,6 +213,7 @@ document.head.innerHTML += "<style>#results_container {color:${endingTextColor};
   const [endingTextColor, setEndingTextColor] = useState("#000000");
 
   const [gameTitle, setGameTitle] = useState("THE CAMPAIGN TRAIL");
+  const [customQuote, setCustomQuote] = useState("");
 
   const [bannerImageUrl, setBannerImageUrl] = useState("https://jetsimon.com/public/placeholderbanner.png");
   const [backgroundImageUrl, setBackgroundImageUrl] = useState("https://coolbackgrounds.io/images/backgrounds/white/pure-white-background-85a2a7fd.jpg");
@@ -343,13 +354,14 @@ document.head.innerHTML += "<style>#results_container {color:${endingTextColor};
           <TextInput label="Question Count" icon="❓" value={data.global_parameter_json[0].fields.question_count} setValue={setQuestionCount}></TextInput>
           <Picker target="Ending Text Color" color={endingTextColor} setColor={setEndingTextColor}></Picker>
           <TextInput label="Title" icon="📖" value={gameTitle} setValue={setGameTitle}></TextInput>
+          <TextInput label="Custom Quote" icon="🪶" value={customQuote} setValue={setCustomQuote}></TextInput>
         </div>
 
-        <p style={{textAlign:"center",fontSize:"10px", color:"lightgrey"}}>version 1.0.7</p>
+        <p style={{textAlign:"center",fontSize:"10px", color:"lightgrey"}}>version 1.0.8</p>
 
       </Resizeable>
       <div style={{width:"100%"}}>
-        <CampaignTrailPreview gameTitle={gameTitle} innerWindowColor={innerWindowColor} data={data} credits={data.credits} electionImage={data.election_json[0].fields.image_url} electionSummary={data.election_json[0].fields.summary} electionYear={data.election_json[0].fields.display_year} fullscreen={fullscreen} headerColor={headerColor} windowColor={windowColor} containerColor={containerColor} backgroundImageUrl={backgroundImageUrl} bannerImageUrl={bannerImageUrl}/>
+        <CampaignTrailPreview customQuote={customQuote} gameTitle={gameTitle} innerWindowColor={innerWindowColor} data={data} credits={data.credits} electionImage={data.election_json[0].fields.image_url} electionSummary={data.election_json[0].fields.summary} electionYear={data.election_json[0].fields.display_year} fullscreen={fullscreen} headerColor={headerColor} windowColor={windowColor} containerColor={containerColor} backgroundImageUrl={backgroundImageUrl} bannerImageUrl={bannerImageUrl}/>
       </div>
     </div>
   );

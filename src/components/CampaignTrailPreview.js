@@ -42,7 +42,7 @@ function CampaignTrailPreview(props) {
         <div className="content_single">
           <div id="game_window" style={{backgroundColor:props.windowColor}}>
             <div className="game_header" style={{backgroundColor:props.headerColor}}>
-              <h2>{props.gameTitle}</h2>
+              <h2>{props.gameTitle}</h2>{props.customQuote != "" ? <font id='wittyquote' size='4' color='white'><em>{props.customQuote}</em></font> : ""}
             </div>
             {getWindowComponent()}
             </div>
