@@ -96,6 +96,14 @@ function App() {
       if(jet_data.customQuote) {
         setCustomQuote(jet_data.customQuote);
       }
+
+      if(jet_data.bannerImageUrl) {
+        setBannerImageUrl(jet_data.bannerImageUrl);
+      }
+
+      if(jet_data.backgroundImageUrl) {
+        setBackgroundImageUrl(jet_data.backgroundImageUrl);
+      }
     }
 
     setData(() => ({...campaignTrail_temp}))
