@@ -365,7 +365,7 @@ document.head.innerHTML += "<style>#results_container {color:${endingTextColor};
           <TextInput label="Custom Quote" icon="🪶" value={customQuote} setValue={setCustomQuote}></TextInput>
         </div>
 
-        <p style={{textAlign:"center",fontSize:"10px", color:"lightgrey"}}>version 1.0.8</p>
+        <p style={{textAlign:"center",fontSize:"10px", color:"lightgrey"}}>version 1.0.9</p>
 
       </Resizeable>
       <div style={{width:"100%"}}>
