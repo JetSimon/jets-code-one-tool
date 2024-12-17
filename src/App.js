@@ -35,6 +35,7 @@ function App() {
   });
 
   const [data, setData] = useState(defaultData);
+  const [existingOseg, setExistingOseg] = useState("");
 
   function loadTheme(fileContent) {
     let campaignTrail_temp = {};
@@ -168,6 +169,33 @@ function App() {
     return output;
   }
 
+  function getOseg() {
+    let oseg = existingOseg == "" ? {} : JSON.parse(existingOseg);
+
+    oseg["candidates"] = data.candidate_json.map((candidate) => {
+
+      let issues = [];
+      if(oseg["DELETE_can_issues"] && oseg["DELETE_can_issues"][candidate.pk])
+      {
+        issues = oseg["DELETE_can_issues"][candidate.pk]
+      }
+
+      return {
+        id : candidate.pk,
+        firstName: candidate.fields.first_name,
+        lastName: candidate.fields.last_name,
+        party: candidate.fields.party,
+        homeState: candidate.fields.state,
+        color: candidate.fields.color_hex,
+        runningMate: candidate.fields.running_mate,
+        isPlayable: candidate.fields.is_active === 1,
+        issueScores : issues
+      }});
+
+    delete oseg["DELETE_can_issues"]
+    return JSON.stringify(oseg, null, 4);
+  }
+
   function getThemeCode() {
     let quoteHtml = customQuote != "" ? `<font id="wittyquote" size="4" color="white"><em>`+customQuote+`</em></font>` : "";
     let output = `
@@ -198,6 +226,20 @@ document.head.innerHTML += "<style>#results_container {color:${endingTextColor};
 
   function exportCode1() {
     const f = getCode();
+    let element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(f));
+    element.setAttribute('download', data.election_json[0].fields.display_year + "_init.txt");
+
+    element.style.display = 'none';
+    document.body.appendChild(element);
+
+    element.click();
+
+    document.body.removeChild(element);
+  }
+
+  function exportOseg() {
+    const f = getOseg();
     let element = document.createElement('a');
     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(f));
     element.setAttribute('download', data.election_json[0].fields.display_year + "_init.txt");
@@ -315,6 +357,7 @@ document.head.innerHTML += "<style>#results_container {color:${endingTextColor};
         <div className="FilterBar">
           <button className="EditorButton" onClick={openFilePicker}>Import Code 1</button>
           <button className="EditorButton" onClick={exportCode1}>Export Code 1</button>
+          <button className="EditorButton" onClick={exportOseg}>Export Oseg</button>
           <button className="EditorButton" onClick={copyToClipboard}>Copy to Clipboard</button>
           <div style={{margin:"auto"}}>
           <label>Or choose a template</label>
@@ -331,6 +374,8 @@ document.head.innerHTML += "<style>#results_container {color:${endingTextColor};
           <button className={"FilterButton" + (mode == "CANDIDATES" ? " SelectedFilterButton" : "")} onClick={() => setMode("CANDIDATES")}>Candidates</button>
           <button className={"FilterButton" + (mode == "MISC" ? " SelectedFilterButton" : "")} onClick={() => setMode("MISC")}>Misc</button>
         </div>
+
+        <textarea onChange={(e) => { setExistingOseg(e.target.value)}}></textarea>
 
         <div className="Settings" style={{display:(mode == "ALL" || mode == "THEME") ? "flex" : "none"}}>
         <h3>Theme</h3>
