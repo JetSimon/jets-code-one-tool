@@ -190,7 +190,7 @@ function App() {
         runningMate: candidate.fields.running_mate,
         isPlayable: candidate.fields.is_active === 1,
         issueScores : issues,
-        description: candidate.fields.description,
+        description: candidate.fields.running_mate ? candidate.fields.description_as_running_mate : candidate.fields.description,
         imageUrl : candidate.fields.image_url,
         runningMateIds: [],
         startingGlobalMultiplier : 1.0
