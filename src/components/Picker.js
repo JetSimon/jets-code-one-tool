@@ -3,6 +3,12 @@ import "./Picker.css";
 
 // https://stackoverflow.com/questions/5560248/programmatically-lighten-or-darken-a-hex-color-or-rgb-and-blend-colors
 function darkenColor(col,amt) {
+
+    if(col == undefined) {
+        console.log("undefined color")
+        return "#000000";
+    }
+
     var usePound = false;
     if ( col[0] === "#" ) {
         col = col.slice(1);

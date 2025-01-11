@@ -40,7 +40,7 @@ function App() {
   function loadTheme(fileContent) {
     let campaignTrail_temp = {};
     let e = campaignTrail_temp;
-    let nct_stuff = {};
+    let nct_stuff = { };
     let jet_data = {};
     let RecReading = "";
     let quotes = [];
@@ -189,7 +189,11 @@ function App() {
         color: candidate.fields.color_hex,
         runningMate: candidate.fields.running_mate,
         isPlayable: candidate.fields.is_active === 1,
-        issueScores : issues
+        issueScores : issues,
+        description: candidate.fields.description,
+        imageUrl : candidate.fields.image_url,
+        runningMateIds: [],
+        startingGlobalMultiplier : 1.0
       }});
 
     delete oseg["DELETE_can_issues"]
