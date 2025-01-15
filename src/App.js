@@ -28,7 +28,7 @@ elections.reverse();
 function App() {
 
   const { openFilePicker, filesContent, loading } = useFilePicker({
-    accept: '.txt',
+    accept: '.txt,.html',
     onFilesSuccessfullySelected: ({ plainFiles, filesContent }) => {
       loadTheme(filesContent[0].content);
     }
@@ -178,6 +178,7 @@ function App() {
       if(oseg["DELETE_can_issues"] && oseg["DELETE_can_issues"][candidate.pk])
       {
         issues = oseg["DELETE_can_issues"][candidate.pk]
+
       }
 
       return {
@@ -187,14 +188,19 @@ function App() {
         party: candidate.fields.party,
         homeState: candidate.fields.state,
         color: candidate.fields.color_hex,
-        runningMate: candidate.fields.running_mate,
-        isPlayable: candidate.fields.is_active === 1,
         issueScores : issues,
-        description: candidate.fields.running_mate ? candidate.fields.description_as_running_mate : candidate.fields.description,
+        description: candidate.fields.description_as_running_mate !== "n/a" ? candidate.fields.description_as_running_mate: candidate.fields.description,
         imageUrl : candidate.fields.image_url,
         runningMateIds: [],
         startingGlobalMultiplier : 1.0
       }});
+
+    oseg.music = [];
+    oseg.credits = "by Dan Bryan, converted by Jet"
+    oseg.theme.advisorImage = data.election_json[0].fields.advisor_url;
+    oseg.scenarioName = data.election_json[0].fields.display_year;
+    oseg.scenarioDescription = data.election_json[0].fields.summary;
+    oseg.scenarioImageUrl = data.election_json[0].fields.image_url;
 
     delete oseg["DELETE_can_issues"]
     return JSON.stringify(oseg, null, 4);
